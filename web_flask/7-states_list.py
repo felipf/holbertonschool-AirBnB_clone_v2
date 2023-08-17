@@ -1,10 +1,5 @@
 #!/usr/bin/python3
-""" script that starts a Flask web application
-    defines routes to handle specific urls
-    etching data from the storage engine
-
-    cat 7-dump.sql | mysql -uroot -p
-"""
+""" Script that starts a Flask web application """
 from flask import Flask
 from flask import render_template
 import models
@@ -14,16 +9,18 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
+@app.route('/states_list', strict_slashes=False)
 def states_list():
-    d_states = models.storage.all(State)
-    return render_template("7-states_list.html", stateslist=d_states.values())
+    """ Function that returns a template """
+    states = models.storage.all(State)
+    return render_template('7-states_list.html', states=states)
 
 
 @app.teardown_appcontext
-def teardown(self):
+def teardown_db(exception):
+    """ Function that removes the current SQLAlchemy Session """
     models.storage.close()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
