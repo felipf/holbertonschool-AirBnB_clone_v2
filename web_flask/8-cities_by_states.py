@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route('/cities_by_states', strict_slashes=False)
 def list_states():
     """ Function that returns a template """
-    cities_of_states = storage.all(State)
+    cities_of_states = models.storage.all(State)
     all_states = []
     for k, v in cities_of_states.items():
         all_states.append(v)
