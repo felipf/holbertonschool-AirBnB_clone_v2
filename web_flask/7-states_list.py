@@ -13,7 +13,10 @@ app = Flask(__name__)
 def states_list():
     """ Function that returns a template """
     states = models.storage.all(State)
-    return render_template('7-states_list.html', states=states)
+    all_states = []
+    for k, v in states.items():
+        all_states.append(v)
+    return render_template('7-states_list.html', all_states=all_states)
 
 
 @app.teardown_appcontext
