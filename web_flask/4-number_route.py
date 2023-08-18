@@ -20,14 +20,14 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c(text):
-    """ Function that returns C followed by the value of the text variable """
+    """ Function that returns C """
     return 'C {}'.format(text.replace('_', ' '))
 
 
 @app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python(text='is cool'):
-    """ Function that returns Python followed by the value of the text variable """
+    """ Function that returns Python """
     return 'Python {}'.format(text.replace('_', ' '))
 
 

@@ -21,14 +21,14 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c(text):
-    """ Function that returns C followed by the value of the text variable """
+    """ Function that returns C """
     return 'C {}'.format(text.replace('_', ' '))
 
 
 @app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python(text='is cool'):
-    """ Function that returns Python followed by the value of the text variable """
+    """ Function that returns Python """
     return 'Python {}'.format(text.replace('_', ' '))
 
 
@@ -47,7 +47,11 @@ def number_template(n):
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_odd_or_even(n):
     """ Function that returns a template """
-    return render_template('6-number_odd_or_even.html', n=n)
+    if n % 2 == 0:
+        txt = 'even'
+    else:
+        txt = 'odd'
+    return render_template('6-number_odd_or_even.html', n=n, txt=txt)
 
 
 if __name__ == '__main__':
