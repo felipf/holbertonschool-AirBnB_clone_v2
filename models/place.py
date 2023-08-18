@@ -8,8 +8,10 @@ from os import getenv
 
 association_table = Table(
     "place_amenity", Base.metadata,
-    Column("place_id", String(60), ForeignKey("places.id"), primary_key=True, nullable=False),
-    Column("amenity_id", String(60), ForeignKey("amenities.id"), primary_key=True, nullable=False)
+    Column("place_id", String(60), ForeignKey("places.id"),
+           primary_key=True, nullable=False),
+    Column("amenity_id", String(60), ForeignKey("amenities.id"),
+           primary_key=True, nullable=False)
     )
 
 
@@ -26,8 +28,10 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0)
     latitude = Column(Float)
     longitude = Column(Float)
-    reviews = relationship("Review", backref="place", cascade="delete")
-    amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
+    reviews = relationship("Review", backref="place",
+                           cascade="delete")
+    amenities = relationship("Amenity",
+                             secondary="place_amenity", viewonly=False)
     amenity_ids = []
 
     if getenv("HBNB_TYPE_STORAGE", None) != "db":
@@ -57,7 +61,7 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, value):
             from models.amenity import Amenity
-            """ handles append method for adding an Amenity.id to the 
+            """ handles append method for adding an Amenity.id to the
                 attribute amenity_ids list. This method should accept only
                 Amenity object"""
             if type(value) == Amenity:
